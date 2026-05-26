@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Isaac Varghese | Founder's Office & Ops Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --green:       #15803D;
+      --green-dark:  #0F5C2D;
+      --green-mid:   #22C55E;
+      --green-light: #DCFCE7;
+      --green-faint: #F0FDF4;
+      --bg:          #FFFFFF;
+      --surface:     #F8FAFC;
+      --text:        #0F172A;
+      --muted:       #475569;
+      --faint:       #94A3B8;
+      --border:      #E2E8F0;
+    }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+ 
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 1.2rem 4rem;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+ 
+    .nav-link {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--faint);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+ 
+    .nav-link:hover { color: var(--green); }
+    .nav-link.active { color: var(--green); }
+ 
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px; left: 50%;
+      transform: translateX(-50%);
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+ 
+    /* HERO */
+    #home {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 5rem 5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    #home::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 60%; height: 130%;
+      background: radial-gradient(ellipse at 60% 40%, #DCFCE7 0%, #F0FDF4 45%, transparent 72%);
+      z-index: 0;
+      pointer-events: none;
+    }
+ 
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+ 
+    .hero-greeting {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+ 
+    .hero-name {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 800;
+      color: var(--green);
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+ 
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 1.75rem;
+    }
+ 
+    .hero-tagline .hl { color: var(--green); font-weight: 600; }
+ 
+    .hero-info {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+ 
+    .info-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+    }
+ 
+    .hero-cta {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.75rem;
+    }
+ 
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--green);
+      border: 2px solid var(--green);
+      padding: 0.72rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+ 
+    .btn-primary:hover { background: var(--green-dark); border-color: var(--green-dark); transform: translateY(-2px); }
+ 
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      background: transparent;
+      border: 2px solid var(--border);
+      padding: 0.72rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+ 
+    .btn-secondary:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+ 
+    .hero-stats { display: flex; gap: 2.25rem; flex-wrap: wrap; }
+ 
+    .stat-num {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      display: block;
+    }
+ 
+    .stat-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--faint);
+      display: block;
+      margin-top: 0.2rem;
+    }
+ 
+    /* PHOTO */
+    .hero-right { display: flex; justify-content: center; align-items: center; }
+ 
+    .photo-wrap { position: relative; width: 300px; height: 300px; }
+ 
+    .photo-circle {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      box-shadow: 0 0 0 3px #BBF7D0, 0 24px 60px rgba(21,128,61,0.18);
+      overflow: hidden;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+ 
+    .photo-placeholder {
+      font-family: 'Russo One', sans-serif;
+      font-size: 7rem;
+      font-weight: 800;
+      color: var(--green);
+      opacity: 0.22;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+ 
+    .photo-circle img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+ 
+    .fbadge {
+      position: absolute;
+      width: 52px; height: 52px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 2;
+    }
+ 
+    .fbadge-top, .fbadge-bottom, .fbadge-mid {
+      top: 50%; left: 50%;
+      right: auto; bottom: auto;
+    }
+
+    .fbadge-top    { animation: orbit 14s linear infinite; }
+    .fbadge-bottom { animation: orbit 14s linear infinite; animation-delay: -4.67s; }
+    .fbadge-mid    { animation: orbit 14s linear infinite; animation-delay: -9.33s; }
+
+    @keyframes orbit {
+      0%   { transform: translate(-50%, -50%) rotate(0deg)   translateY(-170px) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-170px) rotate(-360deg); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 3px #BBF7D0, 0 24px 60px rgba(21,128,61,0.18); }
+      50%       { box-shadow: 0 0 0 10px #BBF7D0, 0 24px 60px rgba(21,128,61,0.38); }
+    }
+
+    .tw-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--green);
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink 0.65s step-end infinite;
+    }
+    .tw-cursor.hidden { display: none; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* SECTIONS */
+    section { padding: 3.5rem 5rem; }
+ 
+    .container { max-width: 1200px; margin: 0 auto; }
+ 
+    .sec-header { text-align: center; margin-bottom: 2rem; }
+ 
+    .sec-chip {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-light);
+      border: 1px solid #BBF7D0;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 0.8rem;
+    }
+ 
+    .sec-title {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+    }
+ 
+    .sec-sub {
+      font-size: 0.95rem;
+      color: var(--faint);
+      margin-top: 0.6rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+ 
+    /* ABOUT */
+    #about { background: var(--surface); }
+ 
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      align-items: center;
+    }
+ 
+    .about-text h3 {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+ 
+    .about-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; }
+    .about-text strong { color: var(--text); font-weight: 600; }
+ 
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+ 
+    .skill-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.35rem 1.25rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+ 
+    .skill-card:hover { border-color: #BBF7D0; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(21,128,61,0.08); }
+ 
+    .skill-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+ 
+    .skill-name {
+      font-family: 'Russo One', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+ 
+    .skill-desc { font-size: 0.75rem; color: var(--faint); line-height: 1.5; }
+ 
+    /* PROJECTS */
+ 
+    .proj-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem 1.25rem;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .proj-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--green-mid));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+ 
+    .proj-card:hover { border-color: #BBF7D0; transform: translateY(-5px); box-shadow: 0 16px 48px rgba(21,128,61,0.1); }
+    .proj-card:hover::before { opacity: 1; }
+ 
+    .proj-emoji { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+ 
+    .proj-category {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.35rem;
+    }
+ 
+    .proj-title {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.7rem;
+      line-height: 1.25;
+    }
+ 
+    .proj-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.25rem; }
+ 
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+ 
+    .ptag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-light);
+      border: 1px solid #BBF7D0;
+      padding: 0.22rem 0.6rem;
+      border-radius: 4px;
+    }
+ 
+    /* CAROUSEL */
+    .carousel-wrap {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .carousel-overflow { overflow: hidden; border-radius: 18px; }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-track .proj-card {
+      min-width: 100%;
+      flex: 0 0 100%;
+      border-radius: 18px;
+      margin: 0;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 42px; height: 42px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .carousel-btn:hover {
+      border-color: var(--green);
+      box-shadow: 0 4px 16px rgba(21,128,61,0.15);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-btn svg { color: var(--text); }
+    .carousel-btn.prev { left: -22px; }
+    .carousel-btn.next { right: -22px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .cdot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, width 0.25s, border-radius 0.25s;
+      padding: 0;
+    }
+
+    .cdot.active {
+      background: var(--green);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 760px) {
+      .carousel-btn.prev { left: -12px; }
+      .carousel-btn.next { right: -12px; }
+    }
+
+    /* EXPERIENCE */
+    #experience { background: var(--surface); }
+ 
+    .exp-list { display: flex; flex-direction: column; gap: 1.25rem; max-width: 860px; margin: 0 auto; }
+ 
+    .exp-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem 2.25rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+ 
+    .exp-card:hover { border-color: #BBF7D0; box-shadow: 0 8px 32px rgba(21,128,61,0.08); }
+ 
+    .exp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.8rem;
+    }
+ 
+    .exp-org {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.3rem;
+    }
+ 
+    .exp-role {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+ 
+    .exp-badge {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--faint);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+ 
+    .exp-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.1rem; }
+ 
+    .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+ 
+    .exp-points li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      display: flex;
+      gap: 0.7rem;
+    }
+ 
+    .exp-points li::before { content: '→'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+ 
+    /* CONTACT */
+    #contact { background: #0B1B12; text-align: center; padding: 3.5rem; }
+ 
+    #contact .sec-chip {
+      color: var(--green-mid);
+      background: rgba(34,197,94,0.12);
+      border-color: rgba(34,197,94,0.25);
+    }
+ 
+    .contact-big {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+ 
+    .contact-big span { color: var(--green-mid); }
+ 
+    .contact-sub {
+      font-size: 1rem;
+      color: #64748B;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+ 
+    .contact-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+ 
+    .contact-btns .btn-secondary { border-color: #1E3A29; color: #94A3B8; }
+    .contact-btns .btn-secondary:hover { border-color: var(--green-mid); color: var(--green-mid); }
+ 
+    .contact-footer-links { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+ 
+    .clink {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #334155;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+ 
+    .clink:hover { color: var(--green-mid); }
+ 
+    footer { background: #060E09; text-align: center; padding: 1.5rem; }
+ 
+    footer p { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: #1E293B; }
+ 
+    /* JOURNEY */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      align-items: start;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .journey-title {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .journey-title span { color: var(--green); }
+
+    .journey-left p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.1rem;
+    }
+
+    .journey-left p strong { color: var(--text); font-weight: 600; }
+
+    .open-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      color: var(--faint);
+      margin-top: 2rem;
+      display: block;
+    }
+
+    .jcard {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.1rem 1.3rem;
+      margin-bottom: 0.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .jcard:hover { border-color: #BBF7D0; box-shadow: 0 8px 32px rgba(21,128,61,0.08); }
+
+    /* FLIP CARD */
+    .flip-card {
+      perspective: 1200px;
+      height: 340px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .flip-card:hover { border: none; box-shadow: none; }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .flip-card-inner.flipped { transform: rotateY(180deg); }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .flip-card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%;
+      display: block;
+    }
+
+    .flip-hint {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 1.25rem 1.1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .flip-card-back {
+      background: #fff;
+      transform: rotateY(180deg);
+      padding: 1.4rem 1.5rem;
+      overflow-y: auto;
+    }
+
+    .jcard-date {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      color: var(--green);
+      margin-bottom: 0.3rem;
+    }
+
+    .jcard-title {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .jcard-points { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .jcard-points li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .jcard-points li::before { content: '→'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+    @media (max-width: 960px) {
+      .journey-grid { grid-template-columns: 1fr; }
+    }
+
+    /* BEYOND */
+    #beyond { background: var(--surface); }
+
+    .beyond-intro {
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+
+    .beyond-intro p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-rows: 260px 260px;
+      gap: 0.75rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .mosaic-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .mosaic-item.tall { grid-row: span 2; }
+
+    .mosaic-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .mosaic-item:hover img { transform: scale(1.04); }
+
+    .mosaic-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.2rem 1.1rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .mosaic-item:hover .mosaic-caption { opacity: 1; }
+
+    .mosaic-caption .cap-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--green-mid);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .mosaic-caption .cap-text {
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 960px) {
+      .mosaic {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .mosaic-item { height: 260px; }
+      .mosaic-item.tall { grid-row: span 1; }
+      .mosaic-caption { opacity: 1; }
+    }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+ 
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { gap: 1.75rem; padding: 1rem 2rem; }
+      #home { padding: 4rem 2rem 2.5rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      section { padding: 2.5rem 2rem; }
+      #contact { padding: 2.5rem 2rem; }
+      .proj-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav { gap: 1rem; }
+      .nav-link { font-size: 0.65rem; }
+      section, #contact { padding: 2rem 1.25rem; }
+      .hero-stats { gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <nav>
+    <a href="#home"       class="nav-link active">Home</a>
+    <a href="#about"      class="nav-link">About</a>
+    <a href="#projects"   class="nav-link">Projects</a>
+    <a href="#contact"    class="nav-link">Contact</a>
+  </nav>
+ 
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-greeting"><span id="tw-greeting"></span><span class="tw-cursor" id="tw-cursor"></span></p>
+        <h1 class="hero-name"><span id="isaac-text"><span id="tw-isaac"></span></span><br><span id="tw-varghese"></span></h1>
+ 
+        <p class="hero-tagline">
+          A passionate operator with deep experience in big box retail. Now I'm bringing that same execution discipline to early-stage companies, looking for a <span class="hl">Founder's Office, Operations, or Generalist</span> role where strategy meets the ground and execution actually matters.
+        </p>
+        <span class="open-tag" style="margin-top:1rem;">Open for Conversations</span>
+ 
+        <div class="hero-info">
+          <span class="info-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Bengaluru, India
+          </span>
+          <!-- UPDATE: replace with your real email -->
+          <span class="info-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+            isaac_varghese@pg26.mesaschool.co
+          </span>
+        </div>
+ 
+        <div class="hero-cta">
+          <!-- UPDATE: replace with your real LinkedIn URL -->
+          <a href="https://www.linkedin.com/in/isaacvarghese7/" target="_blank" class="btn-primary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn Profile
+          </a>
+          <!-- UPDATE: link to your hosted resume (Google Drive, Notion, etc.) -->
+          <a href="Isaac_resume.pdf" target="_blank" class="btn-secondary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Resume
+          </a>
+        </div>
+ 
+        <div class="hero-stats">
+          <div>
+            <span class="stat-num">8+</span>
+            <span class="stat-label">Years at Target India</span>
+          </div>
+          <div>
+            <span class="stat-num" style="font-size:1.1rem;line-height:1.4;">Retail · Inventory · Supply Chain · Demand Planning</span>
+            <span class="stat-label">Industry exposure</span>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="hero-right">
+        <div class="photo-wrap">
+          <div class="photo-circle">
+            <img src="photo.jpg" alt="Isaac Varghese" />
+          </div>
+ 
+          <div class="fbadge fbadge-top">📦</div>
+          <div class="fbadge fbadge-bottom">🚀</div>
+          <div class="fbadge fbadge-mid">👟</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="journey-grid">
+        <div class="journey-right reveal">
+          <div class="jcard flip-card" id="mesa-flip">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="mesa-hq.jpg" alt="Isaac at Mesa School of Business" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;" />
+                <div class="flip-hint">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2H3v16h5l3 3 3-3h7V2z"/></svg>
+                  Click to see experience
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div class="jcard-date">2025 – 2026</div>
+                <div class="jcard-title">PGP in Startup Leadership @ Mesa School of Business</div>
+                <ul class="jcard-points">
+                  <li>Ranked 1st in 2 internal case competitions: pivot strategy for State Plate and GTM plan for Beam Mobility</li>
+                  <li>Eat Better: built a differentiated SKU architecture to unlock new revenue streams in sweets & savories</li>
+                  <li>Sid's Farm: developed competitive positioning framework across 15 SKU categories for private label expansion</li>
+                  <li>Peeko consulting: led customer discovery across 48 parents from 6 cities, surfaced 3 critical pain points</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="jcard flip-card" id="target-flip">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="target-hq.jpg" alt="Isaac at Target HQ" />
+                <div class="flip-hint">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2H3v16h5l3 3 3-3h7V2z"/></svg>
+                  Click to see experience
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div class="jcard-date">2017 – 2025</div>
+                <div class="jcard-title">Demand Planning & Supply Chain @ Target Corporation India</div>
+                <ul class="jcard-points">
+                  <li>Owned end-to-end demand planning for 3,000 Baby Care SKUs across a $1.5B omni-channel portfolio</li>
+                  <li>Founding team member of the demand planning function, building the structure, process, and playbook from scratch</li>
+                  <li>VP Award: prevented $40M in inventory from being misallocated to new stores</li>
+                  <li>Mighty Duck Award: identified and remediated a $680M revenue risk in the Baby category</li>
+                  <li>Improved vendor fulfilment performance from 87% to 96% through proactive supplier engagement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="sec-header reveal">
+        <div class="sec-chip">Projects</div>
+        <h2 class="sec-title">Things I've Built</h2>
+        <p class="sec-sub">Real problems. Real solutions. Not just slide decks.</p>
+      </div>
+ 
+      <div class="carousel-wrap">
+        <button class="carousel-btn prev" aria-label="Previous project">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-overflow">
+        <div class="carousel-track">
+        <div class="proj-card reveal">
+          <span class="proj-emoji">👟</span>
+          <div class="proj-category">Operations · Product · AI</div>
+          <div class="proj-title"><a href="https://comet-ops-dashboard.vercel.app/" target="_blank" style="color:inherit;text-decoration:none;border-bottom:2px solid var(--green);">Comet</a></div>
+          <p class="proj-desc">
+            Comet is a premium Indian sneaker brand with five stores across Bangalore, Delhi, Ahmedabad, and Hyderabad. Running a multi-city retail operation without a centralised tool meant stockouts discovered too late, decisions made on gut feel, and store managers calling each other to check stock. Built a full-stack inventory dashboard covering inbound POs, warehouse bin-level visibility, store health, and an AI demand planning layer with four forecasting models. The dashboard also includes Comet Intelligence: a Claude-powered chat assistant that takes a real-time snapshot of all inventory, sales rates, and inbound stock, and answers operational questions in plain English.
+          </p>
+          <div class="proj-tags">
+            <span class="ptag">React</span>
+            <span class="ptag">Vercel</span>
+            <span class="ptag">Demand Planning</span>
+            <span class="ptag">Inventory Ops</span>
+            <span class="ptag">Claude AI</span>
+            <span class="ptag">Multi-city Retail</span>
+          </div>
+        </div>
+
+        <div class="proj-card reveal">
+          <span class="proj-emoji">🏥</span>
+          <div class="proj-category">Strategy · GTM</div>
+          <div class="proj-title"><a href="Valeo_Collateral.pdf" target="_blank" style="color:inherit;text-decoration:none;border-bottom:2px solid var(--green);">Valeo Health</a></div>
+          <p class="proj-desc">
+            Valeo Health had $20M in funding, clients like DEWA and Deloitte, and still ranked #2 on Google for at-home blood testing in Dubai. Yet they kept losing customers to competitors at the exact moment someone was ready to book. I dug into why. The problem was not visibility, it was trust signals and a split brand across two domains confusing the same buyer. Built a three-part roadmap: unify the brand, add a 48-hour WhatsApp nudge to generate Trustpilot reviews, and redesign landing pages to actually convert high-intent search traffic.
+          </p>
+          <div class="proj-tags">
+            <span class="ptag">GTM Strategy</span>
+            <span class="ptag">Brand Architecture</span>
+            <span class="ptag">Health-Tech</span>
+            <span class="ptag">GCC Market</span>
+            <span class="ptag">Conversion Optimization</span>
+          </div>
+        </div>
+ 
+        <div class="proj-card reveal">
+          <span class="proj-emoji">🛒</span>
+          <div class="proj-category">Product · AI</div>
+          <div class="proj-title"><a href="https://elude-pager-19636829.figma.site" target="_blank" style="color:inherit;text-decoration:none;border-bottom:2px solid var(--green);">FirstClub</a></div>
+          <p class="proj-desc">
+            Most grocery apps hand you a catalogue and wish you luck. I built an AI prototype for FirstClub that works differently. You enter your family's health profile once. It builds your weekly basket from FirstClub's quality-vetted catalogue with a reason for every product, reorders every two weeks, and gets smarter over time. The insight: FirstClub already vets every product. Pantry Planner just makes every family feel like the store was built for them.
+          </p>
+          <div class="proj-tags">
+            <span class="ptag">AI Prototype</span>
+            <span class="ptag">Quick Commerce</span>
+            <span class="ptag">Personalisation</span>
+            <span class="ptag">Figma</span>
+          </div>
+        </div>
+ 
+        <div class="proj-card reveal">
+          <span class="proj-emoji">👶</span>
+          <div class="proj-category">Research · Strategy</div>
+          <div class="proj-title"><a href="PEEKO REVISED DECK.pdf" target="_blank" style="color:inherit;text-decoration:none;border-bottom:2px solid var(--green);">Peeko</a></div>
+          <p class="proj-desc">
+            Ran 30+ parent interviews across six cities for Peeko, a baby care quick-commerce startup. Turned the findings into pitch decks, revenue models, and a strategic report. The big insight: parents don't just want fast delivery. They want to trust what they're buying.
+          </p>
+          <div class="proj-tags">
+            <span class="ptag">Consumer Research</span>
+            <span class="ptag">Quick Commerce</span>
+            <span class="ptag">Pitch Decks</span>
+          </div>
+        </div>
+        </div>
+        <button class="carousel-btn next" aria-label="Next project">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="carousel-dots">
+          <button class="cdot active"></button>
+          <button class="cdot"></button>
+          <button class="cdot"></button>
+          <button class="cdot"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND -->
+  <section id="beyond">
+    <div class="container">
+      <div class="sec-header reveal">
+        <div class="sec-chip">Beyond the Desk</div>
+        <h2 class="sec-title">Work is what I do. This is who I am.</h2>
+        <p class="sec-sub">The same instincts that drive my work — pushing limits, staying consistent, showing up — carry into everything else.</p>
+      </div>
+
+      <div class="beyond-intro reveal">
+        <p>I ride, I run, and I go looking for things that are hard on purpose. Whether it's navigating mountain passes at altitude or finishing an obstacle course covered in mud, I'm drawn to challenges that test more than just fitness.</p>
+      </div>
+
+      <div class="mosaic reveal">
+        <div class="mosaic-item tall">
+          <img src="leh-bike.jpg" alt="Leh-Ladakh bike ride on Royal Enfield" />
+          <div class="mosaic-caption">
+            <span class="cap-label">Leh-Ladakh</span>
+            <span class="cap-text">Royal Enfield. High altitude. Three days of mountain passes and zero regrets.</span>
+          </div>
+        </div>
+        <div class="mosaic-item">
+          <img src="leh-landscape.jpg" alt="Sitting in the Himalayas, Leh" />
+          <div class="mosaic-caption">
+            <span class="cap-label">Somewhere in the Himalayas</span>
+            <span class="cap-text">When the mountains put everything in perspective.</span>
+          </div>
+        </div>
+        <div class="mosaic-item">
+          <img src="devils-circuit.jpg" alt="Devils Circuit Finisher — 75th Edition" />
+          <div class="mosaic-caption">
+            <span class="cap-label">Devil's Circuit · 75th Edition</span>
+            <span class="cap-text">Mud, obstacles, and a team that didn't quit.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-chip reveal">Get in Touch</div>
+      <p class="contact-big reveal">Let's build something <span>real.</span></p>
+      <p class="contact-sub reveal">
+        Looking for Generalist or Operational Excellence roles at AI-led startups in Bangalore.
+        If you're building something and need someone who can actually execute, let's talk.
+      </p>
+      <div class="contact-btns reveal">
+        <!-- UPDATE: your real email -->
+        <a href="mailto:isaac_varghese@pg26.mesaschool.co" class="btn-primary">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          Send an Email
+        </a>
+        <!-- UPDATE: your real LinkedIn -->
+        <a href="https://www.linkedin.com/in/isaacvarghese7/" target="_blank" class="btn-secondary">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="contact-footer-links reveal">
+        <a href="#home"       class="clink">Home</a>
+        <a href="#about"      class="clink">About</a>
+        <a href="#projects"   class="clink">Projects</a>
+      </div>
+    </div>
+  </section>
+ 
+  <footer>
+    <p>© 2026 Isaac Varghese · Bengaluru, India</p>
+  </footer>
+ 
+  <script>
+    // --- Typewriter ---
+    function typeText(el, text, speed, onDone) {
+      let i = 0;
+      function tick() {
+        el.textContent = text.slice(0, i);
+        if (i < text.length) { i++; setTimeout(tick, speed); }
+        else if (onDone) setTimeout(onDone, 250);
+      }
+      tick();
+    }
+
+    window.addEventListener('load', () => {
+      const cursor    = document.getElementById('tw-cursor');
+      const greetEl   = document.getElementById('tw-greeting');
+      const isaacEl   = document.getElementById('tw-isaac');
+      const vargheseEl= document.getElementById('tw-varghese');
+
+      // Move cursor to track the active element
+      function moveCursor(el) { el.parentNode.insertBefore(cursor, el.nextSibling); }
+
+      moveCursor(greetEl);
+      typeText(greetEl, "Hi, I'm", 90, () => {
+        moveCursor(isaacEl);
+        typeText(isaacEl, "Isaac", 85, () => {
+          moveCursor(vargheseEl);
+          typeText(vargheseEl, "Varghese", 85, () => {
+            cursor.classList.add('hidden');
+          });
+        });
+      });
+    });
+
+
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => revealObs.observe(el));
+ 
+    // Flip cards
+    ['target-flip', 'mesa-flip'].forEach(id => {
+      document.getElementById(id).addEventListener('click', function() {
+        this.querySelector('.flip-card-inner').classList.toggle('flipped');
+      });
+    });
+
+    // Carousel
+    const track = document.querySelector('.carousel-track');
+    const dots  = document.querySelectorAll('.cdot');
+    const slides = track.querySelectorAll('.proj-card');
+    let cur = 0;
+
+    function goTo(n) {
+      cur = (n + slides.length) % slides.length;
+      track.style.transform = `translateX(-${cur * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+    }
+
+    document.querySelector('.carousel-btn.prev').addEventListener('click', () => goTo(cur - 1));
+    document.querySelector('.carousel-btn.next').addEventListener('click', () => goTo(cur + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const m = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+          if (m) m.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => navObs.observe(s));
+  </script>
+ 
+</body>
+</html>
